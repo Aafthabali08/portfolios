@@ -25,7 +25,7 @@
       "headers": [{"key": "Cache-Control", "value": "public, max-age=2592000, stale-while-revalidate=86400"}]
     },
     {
-      "source": "/(favicon.svg|aafthab-ali-shaik-resume.pdf)",
+      "source": "/(favicon.ico|icon-32.png|icon-192.png|icon-512.png|apple-touch-icon.png|site.webmanifest|aafthab-ali-shaik-resume.pdf)",
       "headers": [{"key": "Cache-Control", "value": "public, max-age=604800"}]
     }
   ]
