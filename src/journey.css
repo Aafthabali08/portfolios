@@ -1,0 +1,72 @@
+/* Experience as a journey: an arrow travels down an S-shaped path, and each internship
+   card appears when the arrow reaches its checkpoint. */
+.journey{position:relative;padding:150px 0 150px;margin-top:10px}
+.journey-path{position:absolute;inset:0;overflow:visible;pointer-events:none}
+.journey-base{fill:none;stroke:var(--line);stroke-width:2.5;stroke-dasharray:2 10;stroke-linecap:round}
+.journey-trail{fill:none;stroke:var(--ink);stroke-width:3.5;stroke-linecap:round}
+.journey-arrow{position:absolute;left:0;top:0;z-index:3;width:60px;height:60px;border-radius:50%;background:var(--accent);color:#20231e;display:grid;place-items:center;box-shadow:0 0 0 7px var(--bg),0 10px 26px #20231e33;will-change:transform;transition:scale .25s}
+.journey-arrow svg{transition:transform .2s linear}
+.journey-arrow:hover{scale:1.08}
+.journey-arrow.is-waiting::after{content:'';position:absolute;inset:-7px;border-radius:50%;border:2px solid var(--accent);animation:journey-ping 1.6s ease-out infinite}
+.journey-hint{position:absolute;left:calc(4% + 58px);top:172px;color:var(--muted);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.journey-card{position:relative;z-index:2;width:46%;margin-top:190px;padding:28px 30px 24px;background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:0 18px 40px #20231e0f;opacity:0;translate:0 26px;scale:.97;transition:opacity .6s,translate .7s cubic-bezier(.2,.8,.2,1),scale .7s cubic-bezier(.2,.8,.2,1)}
+.journey-card:first-of-type{margin-top:0}
+.journey-card.is-left{margin-left:calc(4% + 58px)}
+.journey-card.is-right{margin-left:auto;margin-right:calc(4% + 58px)}
+.journey-card.is-shown{opacity:1;translate:0 0;scale:1}
+.journey-dot{position:absolute;top:30px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--muted);transition:background .3s,border-color .3s}
+.journey-meta{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:10px}
+.journey-meta b{color:#6e9535;font-weight:700}
+.journey-card h3{font:650 22px/1.3 Manrope,sans-serif;letter-spacing:-.5px;margin:16px 0 6px}
+.journey-role{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;margin:0;font-size:14px;color:var(--ink)}
+.journey-role span{display:inline-flex;align-items:center;gap:5px;color:var(--muted);font-size:13px}
+.journey-summary{margin:14px 0 0;font-size:15px;line-height:1.7;color:var(--muted)}
+.journey-details{animation:journey-open .35s ease-out}
+.journey-details ul{margin:16px 0 18px;padding-left:18px;display:grid;gap:10px}
+.journey-details li{font-size:14.5px;line-height:1.7;color:var(--muted)}
+.journey-details li::marker{color:#6e9535}
+.journey-toggle{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:9px 14px;border-radius:30px;background:var(--soft);font-size:13px;font-weight:550;transition:background .2s}
+.journey-toggle:hover,.journey-card.is-open .journey-toggle{background:var(--accent);color:#20231e}
+@keyframes journey-ping{from{opacity:.9;scale:1}to{opacity:0;scale:1.45}}
+@keyframes journey-open{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media(max-width:759px){
+ .journey{padding:40px 0 90px}
+ .journey-card,.journey-card.is-left,.journey-card.is-right{width:auto;margin:120px 0 0 58px;padding:22px 20px 20px}
+ .journey-card:first-of-type{margin-top:0}
+ .journey-arrow{width:46px;height:46px}.journey-arrow svg{width:20px;height:20px}
+ .journey-hint{left:58px;top:14px}
+ .journey-card h3{font-size:19px}
+}
+@media(prefers-reduced-motion:reduce){.journey-card{transition:none}.journey-arrow.is-waiting::after{animation:none}.journey-details{animation:none}}
+.journey-dot{top:28px;z-index:1;box-shadow:0 0 0 5px var(--bg)}
+.journey-card.is-left .journey-dot{left:-64px}.journey-card.is-right .journey-dot{right:-64px}
+.journey-card .journey-dot{opacity:1}
+.journey-dot.is-reached{background:var(--accent);border-color:#20231e}
+@media(max-width:759px){.journey-card.is-left .journey-dot,.journey-card.is-right .journey-dot{left:-42px;right:auto}}
+/* Train route styling: thick lilac dashes, round stations, the arrow as the train */
+.journey{--route:#c9b8e8;--route-strong:#8a6bd1}
+[data-theme=dark] .journey{--route:#4b4163;--route-strong:#c9b8e8}
+.journey-base{stroke:var(--route);stroke-width:6;stroke-dasharray:14 13;stroke-linecap:round;opacity:.75}
+.journey-route{fill:none;stroke:var(--route-strong);stroke-width:6;stroke-dasharray:14 13;stroke-linecap:round}
+.journey-mask{fill:none;stroke:#fff;stroke-width:16;stroke-linecap:round}
+.journey-trail{display:none}
+.journey-terminal{fill:var(--route);stroke:var(--bg);stroke-width:5;transition:fill .4s}
+.journey-terminal.is-reached{fill:var(--route-strong)}
+.journey-dot{width:24px;height:24px;top:22px;background:var(--route);border:0;box-shadow:0 0 0 6px var(--bg);transition:background .4s,scale .4s}
+.journey-card.is-left .journey-dot{left:-70px}.journey-card.is-right .journey-dot{right:-70px}
+.journey-dot.is-reached{background:var(--route-strong);border:0;animation:station-arrive .7s cubic-bezier(.2,.8,.2,1)}
+.journey-arrow{background:var(--route-strong);color:#fff}
+.journey-arrow.is-waiting::after{border-color:var(--route-strong)}
+.journey-meta b{color:var(--route-strong)}
+.journey-details li::marker{color:var(--route-strong)}
+.journey-toggle:hover,.journey-card.is-open .journey-toggle{background:var(--route);color:#20231e}
+@keyframes station-arrive{0%{scale:1}40%{scale:1.45}100%{scale:1}}
+@media(max-width:759px){.journey-card.is-left .journey-dot,.journey-card.is-right .journey-dot{left:-48px;right:auto}}
+/* Route follows the theme: dark on the light theme, white on the dark theme */
+.journey,[data-theme=dark] .journey{--route:color-mix(in srgb,var(--ink) 22%,var(--bg));--route-strong:var(--ink)}
+.journey-base{opacity:1}
+.journey-arrow{background:var(--ink);color:var(--bg);box-shadow:0 0 0 7px var(--bg),0 10px 26px #0003}
+.journey-arrow.is-waiting::after{border-color:var(--ink)}
+.journey-meta b{color:var(--ink)}
+.journey-details li::marker{color:var(--ink)}
+.journey-toggle:hover,.journey-card.is-open .journey-toggle{background:var(--ink);color:var(--bg)}

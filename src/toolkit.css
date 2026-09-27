@@ -1,0 +1,39 @@
+/* Toolkit as a mechanical keyboard with an LED dot-matrix display
+   (modelled on ritikrana.vercel.app's toolkit section). */
+.toolkit-kb{--kb-ink:var(--ink);--case:#e8dfcb;--cap:#f7f0de;--cap-edge:#cfc4a9;--dark-cap:#2e2530;--dark-edge:#16111a;position:relative;width:100vw;margin-left:calc(50% - 50vw);background:var(--bg);color:var(--ink);border-top:1px solid var(--line);padding:110px max(16px,calc(50vw - 660px)) 90px;scroll-margin-top:0}
+.kb-eyebrow{display:flex;align-items:center;gap:14px;color:var(--muted);letter-spacing:.3em;text-transform:uppercase}
+.kb-eyebrow::before{content:'';width:40px;height:1px;background:#e8704a}
+.kb-title{font:400 clamp(64px,9vw,132px)/.9 'Anton',sans-serif;letter-spacing:-.01em;text-transform:uppercase;color:var(--kb-ink);margin:22px 0 60px}
+.kb{background:var(--case);border-radius:28px;padding:18px;box-shadow:inset 0 2px 0 #fff8,inset 0 -6px 0 #0000001f,0 30px 60px #20231e2e,0 6px 0 #b5aa90}
+.kb-bezel{background:#120d15;border-radius:14px;padding:12px 14px;box-shadow:inset 0 3px 10px #000c}
+.kb-led{display:block;width:100%;height:clamp(70px,8.5vw,118px)}
+.kb-plate{margin-top:16px;background:#d9cfb8;border-radius:12px;padding:8px;display:flex;flex-direction:column;gap:7px;box-shadow:inset 0 2px 6px #0000002a}
+.kb-row{display:flex;gap:7px}
+.kb-key{flex:var(--w) 1 0;min-width:0;height:clamp(52px,6vw,82px);padding:0;background:var(--cap-edge);border-radius:9px;position:relative;cursor:pointer;transition:transform .08s}
+.kb-cap{position:absolute;inset:0 0 5px;border-radius:9px;background:linear-gradient(#fffaf0,var(--cap));box-shadow:inset 0 -2px 0 #0000000f,inset 0 1px 0 #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#2b2330;transition:inset .08s,box-shadow .2s}
+.kb-key:hover .kb-cap{box-shadow:inset 0 -2px 0 #0000000f,inset 0 1px 0 #fff,0 0 0 2px color-mix(in srgb,var(--glow,#e8704a) 55%,transparent)}
+.kb-key:active .kb-cap,.kb-key.is-down .kb-cap{inset:4px 0 1px}
+.kb-logo{width:clamp(15px,1.6vw,22px);height:auto;fill:currentColor}
+.kb-glyph{font:700 clamp(12px,1.2vw,16px) 'Space Mono',monospace}
+.kb-legend{font:700 clamp(7px,.72vw,10.5px) 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:92%}
+.kb-sub{position:absolute;top:6px;right:8px;font:700 9px 'Space Mono',monospace;color:#e8583a;text-transform:uppercase}
+.kb-mod .kb-cap{align-items:flex-start;justify-content:flex-end;padding:0 0 10px 12px}
+.kb-mod .kb-legend{font-weight:400;text-transform:none;letter-spacing:.04em}
+.kb-dark{background:var(--dark-edge)}.kb-dark .kb-cap{background:linear-gradient(#3a2f3c,var(--dark-cap));color:#e8dfcb;box-shadow:inset 0 1px 0 #ffffff14}
+.kb-blue{background:#1d4fa8}.kb-blue .kb-cap{background:linear-gradient(#5b95f5,#3b73db);color:#fff}
+.kb-green{background:#157a55}.kb-green .kb-cap{background:linear-gradient(#3dcf92,#22a672);color:#fff}
+.kb-yellow{background:#b58a14}.kb-yellow .kb-cap{background:linear-gradient(#ffd54a,#f0b820);color:#2b2330}
+.kb-red{background:#a8281f}.kb-red .kb-cap{background:linear-gradient(#ff6a55,#e0412f);color:#fff}
+.kb-blue .kb-cap,.kb-green .kb-cap,.kb-yellow .kb-cap,.kb-red .kb-cap{align-items:center;justify-content:center;padding:0}
+.kb-foot{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:34px}
+.kb-foot p{margin:0;color:var(--muted);letter-spacing:.24em;text-transform:uppercase;font-size:10px}
+.kb-sound{display:inline-flex;align-items:center;gap:10px;background:transparent;border:1px solid var(--line);color:var(--ink);border-radius:30px;padding:11px 20px;transition:background .2s,border-color .2s}
+.kb-sound .mono{letter-spacing:.24em;text-transform:uppercase;font-size:10px}
+.kb-sound:hover{border-color:var(--muted)}.kb-sound.is-on{background:var(--soft);border-color:#e8704a}
+.kb-extra{margin:26px 0 0;font-size:13px;line-height:1.8;color:var(--muted);max-width:760px}
+.kb-key:focus-visible{outline:3px solid #e8704a;outline-offset:2px}
+@media(max-width:900px){.kb{padding:10px;border-radius:18px}.kb-plate{padding:5px;gap:4px}.kb-row{gap:4px}.kb-key,.kb-cap{border-radius:6px}.kb-key{height:46px}.kb-sub{top:3px;right:4px;font-size:7px}.kb-mod .kb-cap{padding:0 0 6px 6px}.kb-legend{font-size:6.5px;letter-spacing:.02em}.kb-mod .kb-legend{font-size:7px}}
+@media(max-width:600px){.toolkit-kb{padding-top:80px;padding-bottom:70px}.kb-wrap{overflow-x:auto}.kb-legend{display:none}.kb-mod .kb-legend{display:block}.kb-key{height:40px}.kb-logo{width:14px}.kb-foot{flex-direction:column;align-items:flex-start}.kb-title{margin-bottom:40px}}
+@media(prefers-reduced-motion:reduce){.kb-key,.kb-cap{transition:none}}
+.kb-lucide{fill:none}
+@media(max-width:600px){.kb-sub{display:none}.kb-mod .kb-legend{font-size:6px}}
