@@ -13,9 +13,9 @@ export const projects = [
 ];
 // Newest first. `summary` is the one-line brief on the journey card; `points` are the full details.
 export const experience = [
- {company:'DRDO · Research Centre Imarat',role:'Software Engineering Intern',date:'MAY — JUL 2026',location:'Hyderabad',
+ {company:'DRDO · Research Centre Imarat (RCI)',role:'Software Engineering Intern',date:'MAY — JUL 2026',location:'Hyderabad',
   summary:'Built a CI/CD pipeline for embedded software build, verification, and static analysis.',
-  points:['Built a GitLab CI/CD pipeline for embedded software build, verification, and static analysis.','Configured GitLab Runners and Docker containers and generated automated build reports.','Collaborated with DRDO scientists on embedded software development and DevOps workflow optimization.'],
+  points:['Designed and developed a CI/CD pipeline for embedded software build, verification, and static analysis using GitLab CI/CD.','Configured GitLab Runners and Docker containers to automate embedded software build workflows.','Performed static code analysis and generated automated build reports to improve software quality.','Collaborated with DRDO scientists on embedded software development and DevOps workflow optimization.'],
   tags:['GitLab CI/CD','GitLab Runner','Docker','Static analysis']},
  {company:'Centre for Extended Reality (CXR) · GITAM University',role:'Full Stack Developer Intern',date:'MAY — JUN 2026',location:'Visakhapatnam',
   summary:'Enhanced the CXR Web Portfolio across frontend and backend with Firebase-powered features.',

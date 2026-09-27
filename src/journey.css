@@ -70,3 +70,5 @@
 .journey-meta b{color:var(--ink)}
 .journey-details li::marker{color:var(--ink)}
 .journey-toggle:hover,.journey-card.is-open .journey-toggle{background:var(--ink);color:var(--bg)}
+/* Smooth arrow: rotation is eased in JS, so no CSS transition fighting it */
+.journey-arrow svg{transition:none;will-change:transform}

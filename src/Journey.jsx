@@ -28,7 +28,7 @@ function buildPath(points,width,endY,mobile){
 
 // The arrow is tied to the scroll position: it sits level with a fixed line on screen and
 // moves exactly as far and as fast as the page scrolls (only a light smoothing).
-const FOLLOW=.35;
+const FOLLOW=.2,TURN=.25,SIDEWAYS=.24,SAMPLE=4,HEADING_LOOKAHEAD=24,DASH_PERIOD=27;
 
 export default function Journey(){
  const wrap=useRef(null),cards=useRef([]),path=useRef(null),trail=useRef(null),arrow=useRef(null),table=useRef(null),current=useRef(0);
@@ -46,31 +46,39 @@ export default function Journey(){
 
  // Sample the path once so scroll position can be mapped to a point on it.
  useLayoutEffect(()=>{
-  const p=path.current;if(!p||!geo)return;const L=p.getTotalLength(),step=4,samples=[];let v=0,prev=p.getPointAtLength(0);
-  for(let l=0;l<=L;l+=step){const pt=p.getPointAtLength(l);v+=Math.abs(pt.y-prev.y)+Math.abs(pt.x-prev.x)*.14;samples.push({l,v,y:pt.y,x:pt.x});prev=pt}
+  const p=path.current;if(!p||!geo)return;const L=p.getTotalLength(),step=SAMPLE,samples=[];let v=0,prev=p.getPointAtLength(0);
+  for(let l=0;l<=L;l+=step){const pt=p.getPointAtLength(l);v+=Math.abs(pt.y-prev.y)+Math.abs(pt.x-prev.x)*SIDEWAYS;samples.push({l,v,y:pt.y,x:pt.x});prev=pt}
   const box=wrap.current.getBoundingClientRect();
   const checkpoints=cards.current.map(c=>{const y=c.getBoundingClientRect().top-box.top+34;return samples.find(s=>s.y>=y-1)?.l??0});
   table.current={L,samples,checkpoints,vMax:v};
   const last=samples[samples.length-1];setEnds([{x:samples[0].x,y:samples[0].y},{x:last.x,y:last.y}]);
-  trail.current.style.strokeDasharray=`${L} ${L}`;
+  
   if(!current.current)current.current=checkpoints[0];
  },[geo]);
 
  // Scroll drives a target length along the path; the arrow eases toward it every frame.
  useEffect(()=>{
-  if(!geo)return;let raf=0,target=0,running=false;
-  const place=()=>{if(table.current){const done=current.current>=table.current.L-4;if(done!==arrivedRef.current){arrivedRef.current=done;setArrived(done)}}const t=table.current;if(!t)return;const p=path.current,l=current.current;
-   const a=p.getPointAtLength(l),b=p.getPointAtLength(Math.min(t.L,l+2)),angle=Math.atan2(b.y-a.y,b.x-a.x)*180/Math.PI;
-   arrow.current.style.transform=`translate(${a.x}px,${a.y}px) translate(-50%,-50%)`;
-   arrow.current.querySelector('svg').style.transform=`rotate(${angle}deg)`;
-   trail.current.style.strokeDashoffset=String(t.L-l);
+  if(!geo)return;let raf=0,target=0,running=false,angle=null,lastTrail=-1;const icon=arrow.current.querySelector('svg');
+  // Position and heading come from the pre-sampled path (cheap), not from the SVG every frame.
+  const at=l=>{const t=table.current,sm=t.samples,f=Math.min(sm.length-1,l/SAMPLE),i=Math.floor(f),j=Math.min(sm.length-1,i+1),u=f-i;return {x:sm[i].x+(sm[j].x-sm[i].x)*u,y:sm[i].y+(sm[j].y-sm[i].y)*u}};
+  // Travelled part: the same dash rhythm, drawn only up to the arrow (a plain dasharray, no SVG mask).
+  const trailDash=l=>{const n=Math.floor(l/DASH_PERIOD),rest=l-n*DASH_PERIOD;return `${'14 13 '.repeat(n)}${Math.min(14,rest).toFixed(1)} ${table.current.L+40}`};
+  const place=()=>{const t=table.current;if(!t)return;const l=current.current;
+   const done=l>=t.L-4;if(done!==arrivedRef.current){arrivedRef.current=done;setArrived(done)}
+   const a=at(l),ahead=at(Math.min(t.L,l+HEADING_LOOKAHEAD)),behind=at(Math.max(0,l-HEADING_LOOKAHEAD));
+   const heading=Math.atan2(ahead.y-behind.y,ahead.x-behind.x)*180/Math.PI;
+   if(angle===null)angle=heading;else{const d=((heading-angle+540)%360)-180;angle+=still?d:d*TURN}
+   arrow.current.style.transform=`translate3d(${a.x.toFixed(1)}px,${a.y.toFixed(1)}px,0) translate(-50%,-50%)`;
+   icon.style.transform=`rotate(${angle.toFixed(1)}deg)`;
+   const rounded=Math.round(l);if(rounded!==lastTrail){lastTrail=rounded;trail.current.style.strokeDasharray=trailDash(l)}
    const reached=t.checkpoints.filter(c=>l>=c-1).length,next=reached>1||l>t.checkpoints[0]+40?reached:0;
-   if(next>shownRef.current){shownRef.current=next;tone(NOTES[(next-1)%NOTES.length],.9,.02);setShown(next)}};
+   if(next>shownRef.current){shownRef.current=next;tone(NOTES[(next-1)%NOTES.length],.9,.02);setShown(next)}
+   return Math.abs(((heading-angle+540)%360)-180)};
   const compute=()=>{const t=table.current;if(!t)return;const box=wrap.current.getBoundingClientRect(),y=window.innerHeight*.55-box.top;
-   const v=Math.max(0,Math.min(1,y/geo.H))*t.vMax;const s=t.samples.find(s=>s.v>=v)||t.samples[t.samples.length-1];
-   target=Math.max(t.checkpoints[0],s.l)};
-  const frame=()=>{const diff=target-current.current;current.current+=still?diff:diff*FOLLOW;place();
-   if(Math.abs(diff)>.5)raf=requestAnimationFrame(frame);else running=false};
+   const v=Math.max(0,Math.min(1,y/geo.H))*t.vMax,sm=t.samples;let lo=0,hi=sm.length-1;while(lo<hi){const mid=(lo+hi)>>1;if(sm[mid].v<v)lo=mid+1;else hi=mid}
+   target=Math.max(t.checkpoints[0],sm[lo].l)};
+  const frame=()=>{const diff=target-current.current;current.current=Math.abs(diff)<.3?target:current.current+(still?diff:diff*FOLLOW);const turning=place();
+   if(Math.abs(diff)>.3||turning>.5)raf=requestAnimationFrame(frame);else running=false};
   const kick=()=>{compute();if(!running){running=true;raf=requestAnimationFrame(frame)}};
   kick();window.addEventListener('scroll',kick,{passive:true});window.addEventListener('resize',kick);
   return()=>{cancelAnimationFrame(raf);window.removeEventListener('scroll',kick);window.removeEventListener('resize',kick)};
@@ -80,9 +88,8 @@ export default function Journey(){
 
  return <div className={'journey'+(geo?.mobile?' is-mobile':'')} ref={wrap}>
   {geo&&<svg className="journey-path" width={geo.W} height={geo.H} viewBox={`0 0 ${geo.W} ${geo.H}`} aria-hidden="true">
-   <defs><mask id="journey-travelled" maskUnits="userSpaceOnUse"><path ref={trail} d={geo.d} className="journey-mask"/></mask></defs>
-   <path ref={path} d={geo.d} className="journey-base"/>
-   <path d={geo.d} className="journey-route" mask="url(#journey-travelled)"/>
+      <path ref={path} d={geo.d} className="journey-base"/>
+   <path ref={trail} d={geo.d} className="journey-route" strokeDasharray="0 100000"/>
    {ends&&<><circle cx={ends[0].x} cy={ends[0].y} r="10" className="journey-terminal is-reached"/><circle cx={ends[1].x} cy={ends[1].y} r="10" className={'journey-terminal'+(shown>=experience.length&&arrived?' is-reached':'')}/></>}
   </svg>}
   {geo&&<button ref={arrow} className={'journey-arrow'+(shown?'':' is-waiting')} onClick={reveal} aria-expanded={open===0} aria-controls="journey-card-0" aria-label={`Start the journey: ${experience[0].company}`}><ArrowRight size={24}/></button>}
