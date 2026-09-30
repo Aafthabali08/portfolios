@@ -4,3 +4,13 @@
 .header nav a,.contact-link{font-size:14px}.section-label,.mono.secondary,.hero-foot,.hero-top>.mono{font-size:12px}.project-category{font-size:10px}.tags>span{font-size:12px}.skill{font-size:14px}.project-info p,.principle p,.education p{font-size:14px}.experience-date{font-size:12px}.preview-label{font-size:9px}.filters button{font-size:14px}.terminal-footer{font-size:10px}.contact .section-label{font-size:12px}@media(max-width:760px){.hero-top>.mono,.hero-foot{font-size:10px}.hero-top>.mono{max-width:185px}.project-category{font-size:10px}.section-label,.skill-row .mono{font-size:12px}.experience-date{font-size:11px}.filters button{font-size:12px}.principle p{font-size:14px}.hero-top .available{font-size:10px}.contact .section-label{font-size:11px}.contact-bottom{font-size:14px}.hero h1{font-size:12.9vw}.hero-foot>span:first-child{max-width:230px}}
 .contact-linkedin{display:inline-flex;align-items:center;gap:8px;font-weight:600}
 .section-placeholder{min-height:100vh}
+/* StudyMind preview: monochrome, like the app itself */
+.sage{background:#d7e2da}
+.study-app{transform:rotate(-4deg)}
+.study-content{padding:13px}
+.study-app h4{margin:8px 0 12px}
+.study-q{font-size:8px;background:#20231e;color:#f8f9f5;padding:8px 10px;border-radius:8px 8px 2px 8px;margin-left:30px}
+.study-a{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;font-size:8px;line-height:1.5;background:#f2f4ec;padding:8px 10px;border-radius:8px 8px 8px 2px;margin:7px 30px 0 0}
+.study-a b{font-size:7px;background:#20231e;color:#f8f9f5;border-radius:3px;padding:1px 4px;white-space:nowrap}
+.study-chips{display:flex;gap:5px;margin-top:12px}
+.study-chips span{font-size:7px;border:1px solid #d8dccf;border-radius:10px;padding:3px 7px}
