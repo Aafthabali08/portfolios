@@ -8,7 +8,7 @@ export const stories = [
   images:[
    {src:'/stories/bnp-innoversite-2026.webp',thumb:'/stories/bnp-innoversite-2026-800.webp',w:1050,h:1400,alt:'Aafthab standing in front of the BNP Paribas Innoversité Hackathon banner in Chennai, 19–20 September 2026'},
    {src:'/stories/bnp-innoversite-4.webp',thumb:'/stories/bnp-innoversite-4-800.webp',w:1600,h:1200,alt:'Teams working on laptops across the hackathon hall'},
-   {src:'/stories/bnp-innoversite-1.webp',thumb:'/stories/bnp-innoversite-1-800.webp',w:1600,h:1066,alt:'A BNP Paribas mentor talking a team through their idea at their desks'},
+   {src:'/stories/bnp-innoversite-1.webp',thumb:'/stories/bnp-innoversite-1-800.webp',w:1600,h:1066,alt:'A BNP Paribas mentor talking us through their idea'},
    {src:'/stories/bnp-innoversite-2.webp',thumb:'/stories/bnp-innoversite-2-800.webp',w:1200,h:1600,alt:'Participants and mentors posing in front of the Innoversité Hackathon backdrop'},
    {src:'/stories/bnp-innoversite-3.webp',thumb:'/stories/bnp-innoversite-3-800.webp',w:1600,h:1200,alt:'A group selfie with fellow participants in hackathon t-shirts'},
    {src:'/stories/bnp-innoversite-5.webp',thumb:'/stories/bnp-innoversite-5-800.webp',w:1600,h:1200,alt:'Certificate of participation, name badge and hackathon t-shirt from Innoversité 2026'}
