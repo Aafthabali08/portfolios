@@ -14,3 +14,16 @@
 .study-a b{font-size:7px;background:#20231e;color:#f8f9f5;border-radius:3px;padding:1px 4px;white-space:nowrap}
 .study-chips{display:flex;gap:5px;margin-top:12px}
 .study-chips span{font-size:7px;border:1px solid #d8dccf;border-radius:10px;padding:3px 7px}
+/* GlassForge preview: frosted glass panel */
+.aqua{background:#cbe5ea}
+.forge-app{transform:rotate(3deg);background:#ffffffcc;backdrop-filter:blur(6px)}
+.forge-content{padding:13px;display:grid;gap:9px}
+.forge-drop{border:1.5px dashed #9fb7bd;border-radius:6px;padding:12px 8px;text-align:center;font-size:10px;font-weight:600;display:grid;gap:4px}
+.forge-drop span{font-size:6.5px;font-weight:400;color:#78806f}
+.forge-file{display:flex;justify-content:space-between;align-items:center;font-size:8px;background:#f2f4ec;border-radius:4px;padding:7px 9px}
+.forge-file b{font-size:8px}
+.forge-bar{height:4px;border-radius:4px;background:#e3e7dd;overflow:hidden}
+.forge-bar i{display:block;width:72%;height:100%;background:#20231e;border-radius:inherit}
+.forge-chips{display:flex;gap:5px}
+.forge-chips span{font-size:7px;border:1px solid #d8dccf;border-radius:10px;padding:3px 7px}
+.forge-chips .on{background:#20231e;color:#f8f9f5;border-color:#20231e}
