@@ -42,3 +42,20 @@
 .sort-controls em{margin-left:auto;font:normal 7px 'Space Mono',monospace;color:#78806f}
 .sort-stats{display:flex;justify-content:space-between;font-size:7px;color:#78806f}
 .sort-stats b{color:#20231e;margin-left:3px}
+/* Dayform preview: today's schedule with check-ins */
+.mint{background:#d3e8d6}
+.day-app{transform:rotate(3deg)}
+.day-content{padding:13px;display:grid;gap:9px}
+.day-app h4{margin:0;font-size:15px}
+.day-list{display:grid;gap:5px}
+.day-item{display:grid;grid-template-columns:30px 1fr auto;align-items:center;gap:7px;font-size:8px;background:#f2f4ec;border-radius:5px;padding:6px 8px}
+.day-item span{font:7px 'Space Mono',monospace;color:#78806f}
+.day-item i{display:grid;place-items:center;width:12px;height:12px;border:1px solid #c9cdc0;border-radius:50%;font-style:normal;font-size:7px}
+.day-item.is-done b{text-decoration:line-through;color:#78806f}
+.day-item.is-done i{background:#20231e;border-color:#20231e;color:#f8f9f5}
+.day-item.is-now{background:#20231e;color:#f8f9f5}
+.day-item.is-now span{color:#c5f564}
+.day-item em{width:34px;height:4px;border-radius:4px;background:#ffffff33;overflow:hidden}
+.day-item em u{display:block;width:60%;height:100%;background:#c5f564}
+.day-stats{display:flex;justify-content:space-between;font-size:7px;color:#78806f}
+.day-stats b{color:#20231e;margin-left:3px}
