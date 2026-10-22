@@ -31,7 +31,7 @@ Alternatively, run `npx vercel` from the project directory and follow the prompt
 
 ## Personalize
 
-Edit `src/data.js` for your name, email, phone, skills, internships, and projects.
+Edit `src/data.js` for your name, email, skills, internships, and projects.
 
 - Set `profile.github` and `profile.linkedin` to your full profile URLs.
 - Set each project's `live` and `github` values to the real deployment and repository URLs. Empty links are deliberately hidden. GitHub, LinkedIn, RouteWise, and Expression links have been populated from the embedded links in your supplied résumé.
@@ -43,7 +43,7 @@ Edit `src/data.js` for your name, email, phone, skills, internships, and project
 
 - Project filters, show-more control, and accessible native project dialogs with Escape/backdrop dismissal and focus restoration.
 - Interactive terminal: `help`, `whoami`, `skills`, `projects`, `education`, `contact`, and `clear`.
-- Light/dark preference saved locally, mobile navigation, expandable experience, current India time, email copying, direct email and telephone links.
+- Light/dark preference saved locally, mobile navigation, expandable experience, current India time, email copying and direct email links.
 - Responsive layouts, reduced-motion support, semantic navigation, keyboard focus states, page metadata, and custom favicon.
 
 Email links open the visitor's mail app. There is no contact-form server, analytics, or visitor data collection. Google Fonts loads the typefaces externally; system fonts remain available as fallbacks.

@@ -1,7 +1,7 @@
 // All personal content and external links live here. Empty URLs are safely hidden.
 export const profile = {
   name: 'Aafthab Ali Shaik', role: 'Software Engineer', email: 'aafthabali08@gmail.com',
-  phone: '+91 7075952588', location: 'Visakhapatnam, India', github: 'https://github.com/aafthabali08', linkedin: 'https://www.linkedin.com/in/aafthab-ali-shaik',
+  location: 'Visakhapatnam, India', github: 'https://github.com/aafthabali08', linkedin: 'https://www.linkedin.com/in/aafthab-ali-shaik',
   resumeUrl: '/aafthab-ali-shaik-resume.pdf', available: true,
   summary: 'I’m a Computer Science student who enjoys turning complex problems into useful software. From responsive interfaces and scalable APIs to real-time machine learning, I build across the stack—with a focus on the details that make things work well.'
 };
