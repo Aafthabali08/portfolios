@@ -40,7 +40,7 @@ export const experience = [
 ];
 export const skills = {
  'Frontend':['React.js','TypeScript','JavaScript','Vite'],
- 'Backend':['Node.js','Express.js','Flask','FastAPI','REST APIs'],
+ 'Backend':['Node.js','Express.js','Flask','FastAPI','REST APIs','.NET'],
  'AI / ML':['TensorFlow','ONNX Runtime','MediaPipe','RAG'],
  'Languages':['Python','Java','C','C#'],
  'Data':['PostgreSQL','MySQL','MongoDB','Firebase','Supabase'],
